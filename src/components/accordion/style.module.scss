@@ -1,0 +1,51 @@
+.accordion {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.accordion:before {
+  content: "";
+  width: 33.333%;
+  height: 1px;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.accordionItem {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.accordionTitle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 700;
+  font-family: var(--family-poppins);
+}
+.accordionArrow {
+  width: clamp(20px, 2.5vw, 30px);
+  height: clamp(20px, 2.5vw, 30px);
+  display: block;
+  background: url(../../../public/images/icon-arrow-down.svg) no-repeat 50% 50% / contain;
+  flex-shrink: 0;
+  transform: scale(0.95) rotate(0);
+  transition: all 0.3s;
+}
+.accordionTitleText { 
+  flex: 1;
+  text-align: left;
+}
+.accordionTitle:not(.active) .accordionArrow {
+  transform: scale(0.95) rotate(-90deg);
+}
+.accordionContent {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;  
+} 
+.open {
+  height: auto;
+}
