@@ -1,51 +1,82 @@
 .accordion {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  position: relative;
+  margin-top: 17px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .accordion:before {
   content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 33.333%;
   height: 1px;
+  display: block;
   border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .accordionItem {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: .25rem;
 }
 
 .accordionTitle {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  align-items: flex-start;
+  padding-left: 34px;
+  gap: 1.5rem;
   width: 100%;
   border: none;
   cursor: pointer;
   font-size: clamp(20px, 2.5vw, 30px);
   font-weight: 700;
-  font-family: var(--family-poppins);
+  font-family: var(--family-heebo);
+  line-height: 1.25;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+
 }
 .accordionArrow {
-  width: clamp(20px, 2.5vw, 30px);
+  position: relative;
+  top: 1px;
+  width: clamp(20px, 2.5vw, 25px);
   height: clamp(20px, 2.5vw, 30px);
   display: block;
   background: url(../../../public/images/icon-arrow-down.svg) no-repeat 50% 50% / contain;
   flex-shrink: 0;
-  transform: scale(0.95) rotate(0);
+  transform: rotate(0);
   transition: all 0.3s;
 }
 .accordionTitleText { 
   flex: 1;
   text-align: left;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
 }
 .accordionTitle:not(.active) .accordionArrow {
-  transform: scale(0.95) rotate(-90deg);
+  transform: rotate(-90deg);
 }
 .accordionContent {
   height: 0;
   overflow: hidden;
-  transition: height 0.3s ease;  
+  transition: height 0.3s ease; 
+  padding-left: 85px; 
 } 
+.accordionContent p {
+  font-family: var(--family-poppins);
+}
 .open {
   height: auto;
+}
+
+@media (max-width: 767px) {
+  .accordion {
+    max-width: 576px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .accordionItem {
+    border-bottom: 1px solid var(--color-white);
+  }
 }

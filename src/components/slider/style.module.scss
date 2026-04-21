@@ -1,0 +1,23 @@
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5%;
+  margin: 0 4%;
+}
+.reviewStars {
+  display: flex;
+  gap: 4px;
+}
+.review h3,
+.review h4,
+.review p {
+  margin-bottom: 0;
+}
+.review h3,
+.review h4 {
+  font-size: 14px;
+}
+.review p {
+  font-size: 12px;
+}

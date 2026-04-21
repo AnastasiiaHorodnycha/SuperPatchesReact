@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Header } from "../components/header";
-import { EmblaCarousel } from "../components/carousel";
 import { Footer } from "../components/footer";
 import SimpleSlider from "../components/slider";
 import Accordion from "../components/accordion";
@@ -200,20 +199,20 @@ export default function Home() {
         <div className="container">
           <h2>Read Real Reviews</h2>
           <h4>Over 6 million people have used VTT Technology, with some people seeing incredible results!</h4>
-          
-          <EmblaCarousel />
-          <SimpleSlider />
+        </div>
+        <div className="container-full">
+          <div className="slider-wrap">
+            <SimpleSlider />
+          </div>
         </div>
       </div>
 
-      <div className="bg-orange section">
-        <div className="container">
+      <div className="bg-orange section faq">
+        <div className="container container--md">
           <div className="text-center">
             <h3 className="family-poppins font-bold">FAQ</h3>
           </div>
-          <div className="faq">
-            <Accordion />
-          </div>
+          <Accordion />
         </div>
       </div>
       
