@@ -168,16 +168,23 @@ p {
 }
 
 @media (max-width: 767px) {
-  h1 {
-    font-size: 2.1875rem;
-  }
   h2.big {
     font-size: 2.375rem;
   }
 }
+@media (max-width: 767px) and (orientation: landscape) {
+  h1 {
+    font-size: 35px;
+  }
+}
+@media (max-width: 767px) and (orientation: portrait) {
+  h1 {
+    font-size: 45px;
+  }
+}
 @media (min-width: 768px) {
   h1 {
-    font-size: 3.5em;
+    font-size: clamp(2.5625rem, 0.2188rem + 4.8828vw, 4.125rem);
   }
   h2.big {
     font-size: 4.375rem;
@@ -198,7 +205,34 @@ p {
   color: var(--color-white);
 }
 
-/* Increase-mobility */ 
+/* Increase-mobility */
+@keyframes bannerTitleWidth {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes bannerTitle {
+  0% {
+    left: 0;
+    right: 0;
+  }
+  100% {
+    left: 100%;
+    right: 0;
+  }
+}
+@keyframes bannerTitleText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .banner {
   position: relative;
   width: 100%;
@@ -212,25 +246,72 @@ p {
 }
 .bannerContent {
   position: absolute;
-  top: 25%;
-  left: 50%;
   color: var(--color-white);
   z-index: 2;
+  max-width: 600px;
+  
+}
+.bannerTitle {
+  position: relative;
+  width: 0;
+  overflow: hidden;
+  animation: bannerTitleWidth 0.25s ease-in forwards;
+}
+.bannerTitle:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  animation: bannerTitle 0.5s ease-in 0.25s forwards;
 }
 .bannerSubTitle {
-  font-size: 24px;
-  font-family: var(--family-poppins);
-  font-weight: 100;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
 }
 .bannerSubTitle p {
-  font-family: inherit;
-  font-weight: inherit;
+  font-weight: 100;
+  line-height: 1.14;
 }
-
-@media (max-width: 767px) {
-  .bannerSubTitle p {
-    font-size: 15px;
-    line-height: 17px;
+.bannerTitleArrow {
+  position: relative;
+  top: 10px;
+  flex-shrink: 0;
+  width: 20px;
+}
+.bannerTitleArrowImg {
+  position: relative;
+  width: 0;
+  animation: bannerTitleWidth 0.25s ease-in 0.5s forwards;
+}
+.bannerTitleArrowImg img {
+  display: block;
+}
+.bannerTitleArrowImg:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: var(--color-white);
+  animation: bannerTitle 0.25s linear 0.75s forwards;
+}
+.bannerSubTitleText {
+  opacity: 0;
+  animation: bannerTitleText 0.25s linear 1s forwards;
+}
+@media (max-width: 767px) and (orientation: landscape) {
+  .bannerSubTitle { 
+    font-size: clamp(0.9375rem, 0.7273rem + 0.6993vw, 1.0625rem);
+  }
+}
+@media (max-width: 767px) and (orientation: portrait) {
+  .bannerSubTitle { 
+    font-size: clamp(0.9375rem, -0.3409rem + 5.4545vw, 1.125rem);
   }
 }
 @media (max-width: 480px) {
@@ -240,7 +321,15 @@ p {
   .bannerImageDesktop {
     display: none;
   }
-  
+  .bannerContent {
+    top: 35px;
+    width: 71%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .bannerTitleArrow {
+    width: 11px;
+  }
 }
 @media (min-width: 481px) {
   .banner {
@@ -249,15 +338,34 @@ p {
   .bannerImageMobile {
     display: none;
   }
+  .bannerContent {
+    top: 25%;
+    left: 48%;
+    width: 50%;
+  }
+  .bannerTitle h1 {
+    white-space: nowrap;
+  }
 }
 @media (min-width: 768px) {
+  .bannerSubTitle {
+    font-size: clamp(1.0625rem, 0.0313rem + 2.1484vw, 1.75rem);
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
   .banner {
-    padding-top: 28.125%;
+    height: 0;
+    padding-top: 64.55%;
   }
 }
 @media (min-width: 1280px) {
   .banner {
+    padding-top: 0;
     height: 800px;
+  }
+  .bannerContent {
+    left: 50%;
+    width: 50%;
   }
 } 
 
@@ -332,6 +440,17 @@ p {
 }
 
 /* Slider */
+.reviews h2,
+.reviews h4 {
+  color: #333;
+}
+.reviews h4 {
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+
 .slider-wrap {
   width: 100%;
   margin-left: auto;
@@ -340,6 +459,8 @@ p {
   border: solid 1px #f0f0f0;
   border-radius: 5px;
   padding: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .slider-wrap  .slick-slider .slick-dots {
   position: relative;
@@ -359,19 +480,40 @@ p {
 }
 .slider-wrap .slick-prev,
 .slider-wrap .slick-next {
-  width: 20px;
-  height: 32px;
-  background: url(../../public/images/icon_prev.png) no-repeat 50% 50%;
+  width: 30px;
+  height: 40px;
+  background: rgba(0,0,0,0.3) url(../../public/images/icon_prev.png) no-repeat 50% 50%;
+  margin-top: -20px;
+  z-index: 10;
+  translate: all 0.3s;
+  opacity: 0;
+}
+.slider-wrap:hover .slick-prev,
+.slider-wrap:hover .slick-next {
+  opacity: 1;
 }
 .slider-wrap .slick-prev {
   left: 0;
+  transform: translate(0);
 }
 .slider-wrap .slick-next {
   right: 0;
+  transform: scale(-1);
 }
 .slider-wrap .slick-prev:before,
 .slider-wrap .slick-next:before {
   display: none;
+}
+.slider-wrap .slick-prev:hover,
+.slider-wrap .slick-next:hover {
+  background: rgba(0,0,0,0.8) url(../../public/images/icon_prev.png) no-repeat 50% 50%;
+}
+@media (max-width: 767px) {
+  .reviews h2 {
+    font-size: 2.375rem;
+    line-height: 1.4;
+    letter-spacing: 1.3px;
+  }
 }
 @media (min-width: 992px) {
   .slider-wrap {

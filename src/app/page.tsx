@@ -29,7 +29,18 @@ export default function Home() {
           </div>
 
           <div className="bannerSubTitle">
-            <p>
+            <div className="bannerTitleArrow">
+              <div className="bannerTitleArrowImg">
+                <Image
+                  className=""
+                  src="/images/icon-rev-h1.png"
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+              </div>
+            </div>
+            <p className="family-poppins bannerSubTitleText">
               Stay active and healthy with Super Patch helping you maintain better balance and improved mobility. 
             </p>
           </div>
@@ -196,9 +207,9 @@ export default function Home() {
       </div>
 
       <div className="reviews section">
-        <div className="container">
-          <h2>Read Real Reviews</h2>
-          <h4>Over 6 million people have used VTT Technology, with some people seeing incredible results!</h4>
+        <div className="container text-center">
+          <h2 className="family-poppins">Read Real Reviews</h2>
+          <h4 className="family-poppins">Over 6 million people have used VTT Technology, with some people seeing incredible results!</h4>
         </div>
         <div className="container-full">
           <div className="slider-wrap">
