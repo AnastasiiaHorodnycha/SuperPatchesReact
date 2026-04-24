@@ -1,10 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Poppins Light';
+  src: url('../../public/fonts/poppins/Poppins-Light.woff2') format('woff2'),
+       url('../../public/fonts/poppins/Poppins-Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../../public/fonts/poppins/Poppins-Regular.woff2') format('woff2'),
+       url('../../public/fonts/poppins/Poppins-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins Medium';
+  src: url('../../public/fonts/poppins/Poppins-Medium.woff2') format('woff2'),
+       url('../../public/fonts/poppins/Poppins-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins Bold';
+  src: url('../../public/fonts/poppins/Poppins-Bold.woff2') format('woff2'),
+       url('../../public/fonts/poppins/Poppins-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --color-white: #ffffff;
@@ -24,7 +56,10 @@
 
   --family-heebo: "Heebo", sans-serif;
   --family-montserrat: "Montserrat", sans-serif;
+  --family-poppins-light: "Poppins Light", sans-serif;
   --family-poppins: "Poppins", sans-serif;
+  --family-poppins-medium: 'Poppins Medium', sans-serif;
+  --family-poppins-bold: "Poppins Bold", sans-serif;
   --family-alata: "Alata", sans-serif;
   --familyRobotoSlab: "Roboto Slab", serif;
 
@@ -56,7 +91,7 @@ a {
   max-width: 1320px;
 }
 .container--md {
-  max-width: calc(968px + 1.125rem + 1.125rem);
+  max-width: calc(962px + 1.125rem + 1.125rem);
 }
 .container-full {
   width: 100%;
@@ -102,9 +137,9 @@ a {
 /* Typography */
 
 h1 {
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.2;
-  font-family: var(--family-poppins);
+  font-family: var(--family-poppins-bold);
 }
 h2 {
   font-size: 2.2rem;
@@ -112,8 +147,10 @@ h2 {
   font-weight: 600;
 }
 h2.big {
-  font-family: var(--family-poppins);
+  font-family: var(--family-poppins-medium);
+  font-weight: 600;
   letter-spacing: 1.3px;
+  line-height: 1.2;
 }
 h3 {
   font-size: 1.75rem;
@@ -273,7 +310,8 @@ p {
   gap: 12px;
 }
 .bannerSubTitle p {
-  font-weight: 100;
+  font-family: var(--family-poppins-light);
+  font-weight: 300;
   line-height: 1.14;
 }
 .bannerTitleArrow {
@@ -343,9 +381,6 @@ p {
     left: 48%;
     width: 50%;
   }
-  .bannerTitle h1 {
-    white-space: nowrap;
-  }
 }
 @media (min-width: 768px) {
   .bannerSubTitle {
@@ -366,6 +401,10 @@ p {
   .bannerContent {
     left: 50%;
     width: 50%;
+  }
+  .bannerTitleWrap {
+    margin-left: 0;
+    margin-right: -55px;
   }
 } 
 
@@ -402,6 +441,12 @@ p {
     height: auto !important;
   }
 }
+@media (min-width: 1280px) {
+  .characTitle {
+    padding-left: 1rem;
+    padding-right: 1rem; 
+  }
+}
 
 /* Single patch */
 .patchCard {
@@ -422,6 +467,7 @@ p {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   font-size: 0.875rem;
+  font-family: 'Arial', sans-serif;
 }
 
 /* Testimonial */
@@ -493,11 +539,11 @@ p {
   opacity: 1;
 }
 .slider-wrap .slick-prev {
-  left: 0;
+  left: 10px;
   transform: translate(0);
 }
 .slider-wrap .slick-next {
-  right: 0;
+  right: 10px;
   transform: scale(-1);
 }
 .slider-wrap .slick-prev:before,

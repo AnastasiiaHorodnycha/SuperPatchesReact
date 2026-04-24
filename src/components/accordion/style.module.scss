@@ -60,10 +60,11 @@
   height: 0;
   overflow: hidden;
   transition: height 0.3s ease; 
-  padding-left: 85px; 
+  padding-left: 63px; 
 } 
 .accordionContent p {
   font-family: var(--family-poppins);
+  font-size: clamp(16px, 1vw, 20px);
 }
 .open {
   height: auto;

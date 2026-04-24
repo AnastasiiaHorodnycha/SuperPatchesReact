@@ -1,6 +1,10 @@
 "use client";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useTranslation } from 'react-i18next';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import style from './style.module.scss'
 
 const dataReview = [
@@ -17,7 +21,7 @@ const dataReview = [
   {
     author: "Jacki J",
     title: "My life has changed",
-    content: "At times, I have severe joint and muscle pain. These Super Patches have given me more pain-free days that I've had in 10 years!"
+    content: "At times, I have severe joint and muscle pain. These Super Patches have given me more pain-free days that I have had in 10 years!"
   },
   {
     author: "Theresa Z",
@@ -61,10 +65,23 @@ export default function SimpleSlider() {
     ]
   };
 
+  const { t } = useTranslation('common');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Return original text during SSR to prevent hydration mismatch
+  const getTranslation = (key: string) => {
+    if (!mounted) return key;
+    return t(key);
+  };
+
   return (
-    <Slider {...settings}>
+    <Slider {...settings} accessibility={true}>
       {dataReview.map((item, index) => {
-        return (        
+        return (
           <div key={index}>
             <div className={style.review}>
               <h4 className={style.reviewAuthor}>{item.author}</h4>
@@ -105,10 +122,10 @@ export default function SimpleSlider() {
                   priority
                 />
               </div>
-              <h3>{item.title}</h3>
-              <p>
-                {item.content}
-              </p>
+              <h3>{getTranslation(item.title)}</h3>
+              <p
+                dangerouslySetInnerHTML={{ __html: getTranslation(item.content) }}
+              />
             </div>
           </div>
         )})}

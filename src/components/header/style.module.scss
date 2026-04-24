@@ -37,17 +37,25 @@
   background: url(../../../public/images/icon-next.png) no-repeat center center / contain;
   display: block;
 }
-.dropdownLink:hover + .dropdownMenu {
+.dropdownLink:hover + .dropdownMenu,
+.dropdownMenu:hover {
   display: block;
 }
 .dropdownMenu {
   display: none;
+  z-index: 10;
 }
-.dropdownMenu a {
+.dropdownMenu a,
+.dropdownMenu button {
   display: block;
   width: 100%;
   padding: var(--dropdown-item-padding-y) var(--dropdown-item-padding-x);
-  white-space: nowrap;
+  white-space: nowrap;  
+  text-align: left;
+}
+
+.dropdownMenu button {
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {

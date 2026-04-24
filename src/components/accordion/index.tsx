@@ -1,12 +1,13 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cn from "classnames";
+import { useTranslation } from 'react-i18next';
 import style from './style.module.scss'
 const data = [
   {
     question: "How does super patch's technology work?",
     answer:
-      "The technology inside the Super Patch has uniquely arranged ridges that look like a QR code, when these ridges touch our skin, our cells transmit unique signals that interact with our body's nervous system. The inventor of these patches discovered the different signals that work with the body's physical, mental and emotional functions, each different Super Patch has a unique ridged pattern (QR Codes) that helps with a wide array of wellness and performance benefits"
+      "The technology inside the Super Patch has uniquely arranged ridges that look like a QR code, when these ridges touch our skin, our cells transmit unique signals that interact with our body's nervous system. <br /> <br/> The inventor of these patches discovered the different signals that work with the body's physical, mental and emotional functions, each different Super Patch has a unique ridged pattern (QR Codes) that helps with a wide array of wellness and performance benefits."
   },
   {
     question: "How do you use super patch technology?",
@@ -32,22 +33,37 @@ const Accordion = () => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  const { t } = useTranslation('common');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Return original text during SSR to prevent hydration mismatch
+  const getTranslation = (key: string) => {
+    if (!mounted) return key;
+    return t(key);
+  };
+
   return (
     <div className={style.accordion}>
       {data.map((item, index) => {
         const isOpen = activeIndex === index;
-        return (        
+        return (
         <div className={style.accordionItem} key={index}>
           <button
             className={cn(style.accordionTitle, {[style.active] : isOpen})}
             onClick={() => handleItemClick(index)}
           >
-            <span className={style.accordionArrow}></span> 
-            <span className={style.accordionTitleText}>{item.question}</span>
+            <span className={style.accordionArrow}></span>
+            <span className={style.accordionTitleText}>{getTranslation(item.question)}</span>
           </button>
 
           <div className={cn(style.accordionContent, { [style.open]: isOpen })}>
-            <p>{item.answer}</p>
+            <p
+                dangerouslySetInnerHTML={{ __html: getTranslation(item.answer) }}
+              />
           </div>
         </div>
       )})}
