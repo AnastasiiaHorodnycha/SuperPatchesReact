@@ -9,9 +9,6 @@
   justify-content: space-between;
   align-items: center;
 }
-.nav {
-  flex: 1;
-}
 .navList {
   width: 100%;
   list-style: none;
@@ -68,10 +65,16 @@
     align-items: center;
     width: 100%;
   }
+  .nav {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
   .navList {
-    display: none;
     flex-direction: column;
     text-align: center;
+    font-family: var(--family-heebo);
   }
   .hamburger {
     padding: 0.25rem 0.75rem;
@@ -122,5 +125,8 @@
   .dropdownLink:hover:before{
     width: calc(100% - 40px);
     background-color: var(--dropdown-link-color);
+  }
+  .nav {
+    flex: 1;
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import cn from "classnames";
 import Image from "next/image";
 import { useTranslation } from 'react-i18next';
@@ -11,11 +11,33 @@ export const Header = () => {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
   const [currentLang, setCurrentLang] = useState('en');
+  const [heightNav, setHeightNav] = useState(0);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const navListRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     setCurrentLang(i18n.language);
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    const navElement = navListRef.current;
+    if (!navElement) return;
+
+    const updateHeight = () => setHeightNav(navElement.offsetHeight);
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(navElement);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleNav = () => {
+    setIsNavOpen((prev) => !prev);
+  };
+
+  const navStyle = isNavOpen ? { height: `${heightNav}px` } : {height: `0`};
 
   // Return original text during SSR to prevent hydration mismatch
   const getTranslation = (key: string) => {
@@ -24,7 +46,6 @@ export const Header = () => {
   };
 
   const changeLanguage = async (lng: string) => {
-    console.log('Changing language to:', lng);
     await i18n.changeLanguage(lng);
     setCurrentLang(lng);
   };
@@ -53,13 +74,13 @@ export const Header = () => {
             />
           </a>
 
-          <button className={style.hamburger}>
+          <button className={style.hamburger} onClick={toggleNav} type="button" aria-expanded={isNavOpen} aria-controls="header-navigation">
             <span className={style.hamburgerBar}></span>
           </button>
         </div>
 
-        <nav className={style.nav}>
-          <ul className={style.navList}>
+        <nav className={style.nav} style={navStyle} id="header-navigation">
+          <ul className={style.navList} ref={navListRef}>
             <li className={style.navItem}>
               <a href="#">{getTranslation('Shop')}</a>
             </li>

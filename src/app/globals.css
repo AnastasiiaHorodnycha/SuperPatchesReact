@@ -351,6 +351,9 @@ p {
   .bannerSubTitle { 
     font-size: clamp(0.9375rem, -0.3409rem + 5.4545vw, 1.125rem);
   }
+  .bannerImage img {
+    transform: scale(1.15) translateY(-7px);
+  }
 }
 @media (max-width: 480px) {
   .banner {
